@@ -12,7 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
 
 
 @Entity
@@ -25,6 +27,7 @@ public class Cliente implements Serializable{
 	private Long id;
 	private String nome;
 	private String cpf;
+	@JsonFormat(shape =JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
 	private Instant dataNascimento;
 	
 	@JsonIgnore

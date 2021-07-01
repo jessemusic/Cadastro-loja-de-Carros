@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import br.com.jmcmusicmattec.Loja_de_carros.service.exceptions.DatabaseException;
 import br.com.jmcmusicmattec.Loja_de_carros.service.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
@@ -23,6 +24,18 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(status).body(err);
 		
 	}
+	
+	@ExceptionHandler(DatabaseException.class)
+	public ResponseEntity<StandardError> BasedeDados(DatabaseException e, 
+			HttpServletRequest request){
+		String error = "Erro na base de dados";
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+		
+	}
+	
+	
 	
 
 }
