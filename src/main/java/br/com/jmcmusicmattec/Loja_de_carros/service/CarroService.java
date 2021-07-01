@@ -23,5 +23,9 @@ public class CarroService {
 		Optional<Carro> obj = repository.findById(id);
 		return obj.get();
 	}
+	
+	public Carro insert(Carro obj) {
+		return repository.save(obj);
+	}
 
 }
