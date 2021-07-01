@@ -27,5 +27,10 @@ public class CarroService {
 	public Carro insert(Carro obj) {
 		return repository.save(obj);
 	}
+	
+
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
 
 }
