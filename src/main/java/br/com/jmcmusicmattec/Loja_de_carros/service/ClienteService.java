@@ -43,9 +43,14 @@ public class ClienteService {
 	}
 	
 	public Cliente update(Long id, Cliente obj) {
+		try {
 		Cliente entity = repository.getOne(id);
 		updateData(entity,obj);
 		return repository.save(entity);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			throw new ResourceNotFoundException(id);
+		}
 
 	}
 
