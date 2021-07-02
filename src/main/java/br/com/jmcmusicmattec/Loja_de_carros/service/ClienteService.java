@@ -3,6 +3,8 @@ package br.com.jmcmusicmattec.Loja_de_carros.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -47,9 +49,8 @@ public class ClienteService {
 		Cliente entity = repository.getOne(id);
 		updateData(entity,obj);
 		return repository.save(entity);
-		}catch(RuntimeException e) {
-			e.printStackTrace();
-			throw new ResourceNotFoundException(id);
+		}catch(EntityNotFoundException e) {
+				throw new ResourceNotFoundException(id);
 		}
 
 	}
